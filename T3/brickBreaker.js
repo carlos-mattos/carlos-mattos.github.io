@@ -83,8 +83,6 @@ const bloco1Sound = new Audio("../assets/sounds/bloco1.mp3");
 bloco1Sound.preload = "auto";
 const bloco2Sound = new Audio("../assets/sounds/bloco2.mp3");
 bloco2Sound.preload = "auto";
-const powerUpSound = new Audio("../assets/sounds/bloco3.mp3");
-powerUpSound.preload = "auto";
 
 let powerUp = new THREE.Mesh(
   new THREE.CylinderGeometry(0.26, 0.26, 0.2, 20),
@@ -764,7 +762,7 @@ function checkRectangleCollisions() {
         } else if (object.userData.hitCount === 1) {
           scene.remove(object);
           removedRectangles.push(object);
-          if (removedRectangles.length % 1 == 0) {
+          if (removedRectangles.length % 10 == 0) {
             criaPowerUp();
           }
         }
@@ -817,10 +815,6 @@ function movimentaPowerUp() {
   ) {
     powerUp.visible = false;
     powerUp.position.y = -5;
-    // powerUpSound.currentTime = 0;
-    // powerUpSound
-    //   .play()
-    //   .catch((error) => console.error("Erro ao reproduzir o som:", error));
   }
 }
 
