@@ -77,6 +77,15 @@ let follow = true;
 let levelUp = false;
 let hasCollidedThisFrame = false;
 
+const rebatedorSound = new Audio("../assets/sounds/rebatedor.mp3");
+rebatedorSound.preload = "auto";
+const bloco1Sound = new Audio("../assets/sounds/bloco1.mp3");
+bloco1Sound.preload = "auto";
+const bloco2Sound = new Audio("../assets/sounds/bloco2.mp3");
+bloco2Sound.preload = "auto";
+const powerUpSound = new Audio("../assets/sounds/bloco3.mp3");
+powerUpSound.preload = "auto";
+
 let powerUp = new THREE.Mesh(
   new THREE.CylinderGeometry(0.26, 0.26, 0.2, 20),
   new THREE.MeshPhongMaterial({ color: 0x8103a0 })
@@ -192,6 +201,7 @@ function buildRectanglesForPhase() {
         // Determine the color of the rectangle and the hit count
         const rectangleColor = colors[row];
         const hitCount = rectangleColor === "gray" ? 2 : 1;
+        const soundToPlay = rectangleColor === "gray" ? "2" : "1";
         const material = new THREE.MeshLambertMaterial({
           color: rectangleColor,
         });
@@ -219,7 +229,7 @@ function buildRectanglesForPhase() {
           (numRows / 2 - row - 1) * (rectangleHeight + rectangleSpacing) +
           rectangleHeight / 2;
 
-        rectangle.userData = { hitCount };
+        rectangle.userData = { hitCount, soundToPlay };
 
         rectangle.position.set(offsetX, offsetY, 0.02);
         rectangle.castShadow = true;
@@ -259,6 +269,7 @@ function buildRectanglesForPhase() {
 
           // Determine the hit count and create the rectangle
           const hitCount = rectangleColor === "gray" ? 2 : 1;
+          const soundToPlay = rectangleColor === "gray" ? "2" : "1";
           let rectangle = null;
 
           if (rectangleColor === "gray") {
@@ -291,7 +302,7 @@ function buildRectanglesForPhase() {
             rectangle.position.set(offsetX + 2.0, offsetY, 0.2);
           }
 
-          rectangle.userData = { hitCount };
+          rectangle.userData = { hitCount, soundToPlay };
 
           scene.add(rectangle);
           builtRectangles.push(rectangle);
@@ -334,6 +345,7 @@ function buildRectanglesForPhase() {
 
         if (layoutCell !== " ") {
           const hitCount = rectangleColor === "gold" ? -1 : 1;
+          const soundToPlay = rectangleColor === "gold" ? "2" : "1";
           const material = new THREE.MeshLambertMaterial({
             color: rectangleColor,
           });
@@ -349,7 +361,7 @@ function buildRectanglesForPhase() {
             (numRows / 2 - row - 1) * (rectangleHeight + spacing) +
             rectangleHeight / 2;
 
-          rectangle.userData = { hitCount };
+          rectangle.userData = { hitCount, soundToPlay };
 
           rectangle.position.set(offsetX, offsetY, 0.02);
           rectangle.castShadow = true;
@@ -658,36 +670,33 @@ function checkWallCollisions() {
 }
 
 function checkHitterCollisions() {
-  // Cria esferas de colisão para a bola e o rebatedor
   const ballBoundingSphere = new THREE.Sphere(intersectionBall.position, 0.15);
   const hitterBoundingSphere = new THREE.Sphere(hitter.position, 0.8);
 
-  // Calcula a distância entre os centros das esferas
   const distance = ballBoundingSphere.center.distanceTo(
     hitterBoundingSphere.center
   );
   const sumRad = ballBoundingSphere.radius + hitterBoundingSphere.radius;
 
   if (distance <= sumRad) {
-    // Calcula o vetor normal à superfície da colisão
     const normal = new THREE.Vector3()
       .subVectors(ballBoundingSphere.center, hitterBoundingSphere.center)
       .normalize();
 
-    // Calcula o vetor de reflexão da direção atual da bola
     const reflectionVector = new THREE.Vector3()
       .copy(ballDirection)
       .reflect(normal);
 
-    // Atualiza a direção da bola com o vetor de reflexão
     ballDirection.copy(reflectionVector).normalize();
+    rebatedorSound.currentTime = 0;
+    rebatedorSound
+      .play()
+      .catch((error) => console.error("Erro ao reproduzir o som:", error));
 
-    // Move a bola para fora do rebatedor para evitar colisões contínuas
     const penetrationDepth = sumRad - distance;
     const correctionVector = normal.clone().multiplyScalar(penetrationDepth);
     intersectionBall.position.add(correctionVector);
 
-    // Atualiza a posição da bola após a colisão
     updateBallPosition();
   }
 }
@@ -755,9 +764,25 @@ function checkRectangleCollisions() {
         } else if (object.userData.hitCount === 1) {
           scene.remove(object);
           removedRectangles.push(object);
-          if (removedRectangles.length % 10 == 0) {
+          if (removedRectangles.length % 1 == 0) {
             criaPowerUp();
           }
+        }
+
+        if (object.userData.soundToPlay === "1") {
+          bloco1Sound.currentTime = 0;
+          bloco1Sound
+            .play()
+            .catch((error) =>
+              console.error("Erro ao reproduzir o som:", error)
+            );
+        } else if (object.userData.soundToPlay === "2") {
+          bloco2Sound.currentTime = 0;
+          bloco2Sound
+            .play()
+            .catch((error) =>
+              console.error("Erro ao reproduzir o som:", error)
+            );
         }
 
         hasCollidedThisFrame = true;
@@ -792,6 +817,10 @@ function movimentaPowerUp() {
   ) {
     powerUp.visible = false;
     powerUp.position.y = -5;
+    // powerUpSound.currentTime = 0;
+    // powerUpSound
+    //   .play()
+    //   .catch((error) => console.error("Erro ao reproduzir o som:", error));
   }
 }
 
