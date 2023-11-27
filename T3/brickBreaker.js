@@ -457,8 +457,8 @@ function buildPlane() {
   planeGeometry = new THREE.PlaneGeometry(7.8, 13.7);
   planeMaterial = new THREE.MeshLambertMaterial();
   planeMaterial.side = THREE.DoubleSide;
-  planeMaterial.trasnparent = true;
-  planeMaterial.opacity = 0;
+  planeMaterial.transparent = true;
+  planeMaterial.opacity = 0.9;
   plane = new THREE.Mesh(planeGeometry, planeMaterial);
   scene.add(plane);
   objects.push(plane); // List of objects to be checked by raycaster
