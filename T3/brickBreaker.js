@@ -176,12 +176,12 @@ function buildSkybox() {
   const path = "../assets/";
   const format = ".png";
   const urls = [
-    path + "dawnmountain-xpos" + format,
-    path + "dawnmountain-xneg" + format,
-    path + "dawnmountain-ypos" + format,
-    path + "dawnmountain-yneg" + format,
-    path + "dawnmountain-zpos" + format,
-    path + "dawnmountain-zneg" + format,
+    path + "sp2_ft" + format,
+    path + "sp2_bk" + format,
+    path + "sp2_up" + format,
+    path + "sp2_dn" + format,
+    path + "sp2_rt" + format,
+    path + "sp2_lf" + format,
   ];
   // Setting the two cube maps, one for refraction and one for reflection
   let cubeMapTexture = new THREE.CubeTextureLoader().load(urls);
