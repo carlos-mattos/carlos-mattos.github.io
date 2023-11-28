@@ -541,8 +541,7 @@ function buildHitter() {
   hitter.castShadow = true;
   hitter.receiveShadow = true;
 
-  //////////////////////////////////////
-
+  // Criação da nave
   const objLoader = new OBJLoader();
   objLoader.load(
     objPath,
@@ -605,7 +604,7 @@ function updateObject(mesh) {
 function buildBall() {
   intersectionBall = new THREE.Mesh(
     new THREE.SphereGeometry(0.15, 20, 20),
-    new THREE.MeshPhongMaterial({ color: "blue" })
+    new THREE.MeshPhongMaterial({ color: "white" })
   );
   intersectionBall.castShadow = true;
   scene.add(intersectionBall);
@@ -830,9 +829,15 @@ function movimentaPowerUp() {
   if (
     (powerUp.position.y < hitter.position.y + 1.4 &&
       powerUp.position.x < hitter.position.x + 1 &&
-      powerUp.position.x > hitter.position.x - 1) ||
-    powerUp.position.y < -7
+      powerUp.position.x > hitter.position.x - 1)
   ) {
+    powerUp.visible = false;
+    powerUp.position.y = -5;
+    // const cloneBall = intersectionBall.clone();
+    // scene.add(cloneBall)
+    // intersectionBall.position.copy(hitter.position);
+    // intersectionBall.position.y += 1.2;
+  } else if (powerUp.position.y < -7) {
     powerUp.visible = false;
     powerUp.position.y = -5;
   }
