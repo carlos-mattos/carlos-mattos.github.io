@@ -6,10 +6,11 @@ export class TertiaryBox {
     this.box.style.top = "0";
     this.box.style.right = "0";
     this.box.style.position = "fixed";
-    this.box.style.backgroundColor = "trasparent";
+    this.box.style.backgroundColor = "transparent";
     this.box.style.color = "white";
     this.box.style.fontFamily = "sans-serif";
     this.box.style.fontSize = "26px";
+    this.box.style.whiteSpace = "pre-line";
 
     this.textnode = document.createTextNode(defaultText);
     this.box.appendChild(this.textnode);

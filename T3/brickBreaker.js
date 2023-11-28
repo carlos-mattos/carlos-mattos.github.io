@@ -391,7 +391,7 @@ function buildRectanglesForPhase() {
 }
 
 function checkIfGameIsOver() {
-  if (4 === removedRectangles.length) {
+  if (6 === removedRectangles.length) {
     if (currentPhase === 3) {
       controlPauseSimulation();
       document.getElementById("webgl-output").style.display = "none";
@@ -857,8 +857,7 @@ function movimentaPowerUp() {
 
 function checkLife() {
   if (lifes === 0) {
-    lifes = 5;
-    rebuildInitialState();
+    controlPauseSimulation();
   }
 }
 
@@ -882,7 +881,11 @@ function render() {
   }
 
   infoMessage.changeMessage(`Ball speed: ${ballSpeed.toFixed(4)}`);
-  lifeBar.changeMessage("\u2764\uFE0F".repeat(lifes));
+  lifeBar.changeMessage(
+    lifes > 0
+      ? "\u2764\uFE0F".repeat(lifes)
+      : "Game Over\nAperte F5 para reiniciar"
+  );
 
   requestAnimationFrame(render);
   renderer.render(scene, camera);
