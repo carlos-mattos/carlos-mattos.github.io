@@ -431,10 +431,10 @@ function orbitControl() {
   if (controls.enabled) {
     controls.enabled = false;
 
-    camera.position.z = 6;
-    camera.position.y = -5.5;
+    camera.position.z = 4.2;
+    camera.position.y = -6.46;
     camera.position.x = 0;
-    const target = new THREE.Vector3(0, -1.5, -1.6); // Ponto para o qual a câmera olhará
+    const target = new THREE.Vector3(0, -2.2, -1.6); // Ponto para o qual a câmera olhará
     camera.lookAt(target);
   } else {
     controls.enabled = true;
