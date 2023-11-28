@@ -835,6 +835,13 @@ function movimentaPowerUp() {
   }
 }
 
+function checkLife() {
+  if (lifes === 0) {
+    lifes = 5;
+    rebuildInitialState();
+  }
+}
+
 function render() {
   if (isSimulationPaused) {
     requestAnimationFrame(render);
@@ -851,6 +858,7 @@ function render() {
     checkWallCollisions();
     checkHitterCollisions();
     checkRectangleCollisions();
+    checkLife()
   }
 
   infoMessage.changeMessage(`Ball speed: ${ballSpeed.toFixed(4)}`);
