@@ -1,22 +1,57 @@
 <!DOCTYPE html>
-<html>
-   <head>
-      <title>Brick Breaker</title>
+<html lang="en">
 
-      <link rel="shortcut icon" href="../favicon.ico">
-      <link rel="stylesheet" href="../html/resources/default.css">
-      <meta name="viewport" content="width=device-width, initial-scale=1">  
-   </head>
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Brick Breaker</title>
+   <link rel="shortcut icon" href="../favicon.ico">
+   <link rel="stylesheet" href="../html/resources/default.css">
+   <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+   <script type="importmap">
+        {"imports": {"three": "../build/three.module.js"}} 
+    </script>
+</head>
 
-   <body>
-      <!-- Import maps polyfill -- Remove this when import maps will be widely supported-->
-      <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>  
-      <script type="importmap"> 
-         {"imports": {"three": "../build/three.module.js"}} 
-      </script>  
+<body>
 
-      <div id="webgl-output">     
-         <script type="module" src="brickBreaker.js"></script>
-      </div>
-   </body>
+   <div id="start-button-container" style="
+      display: flex;
+      justify-content: center; 
+      align-items: flex-end; 
+      height: 100vh; 
+      margin: 0; 
+      text-align: center; 
+      background: url(https://raw.githubusercontent.com/carlos-mattos/carlos-mattos.github.io/master/assets/background-image.jpeg) no-repeat center center fixed;
+      background-size: cover;
+      ">
+      <button id="start-button" style="
+         font-size: 24px; 
+         padding: 15px 30px; 
+         cursor: pointer;
+         background-color: #2f006d; 
+         border: none;
+         border-radius: 30px;
+         color: #fff; 
+         font-weight: bold;
+         margin-bottom: 5rem;
+         ">
+         Começar</button>
+   </div>
+
+   <div id="webgl-output" style="display: none;"></div>
+
+   <script>
+      document.getElementById('start-button').addEventListener('click', function () {
+         document.getElementById('start-button-container').style.display = 'none';
+         document.getElementById('webgl-output').style.display = 'block';
+         var script = document.createElement('script');
+         script.type = 'module';
+         script.src = 'brickBreaker.js';
+         document.getElementById('webgl-output').appendChild(script);
+      });
+   </script>
+
+</body>
+
 </html>
