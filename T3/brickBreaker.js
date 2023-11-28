@@ -31,13 +31,13 @@ window.addEventListener(
 );
 controls.enabled = false;
 
-camera.position.z = 6;
-camera.position.y = -5.5;
-const target = new THREE.Vector3(0, -1.5, -1.6); // Ponto para o qual a câmera olhará
+camera.position.z = 4.2;
+camera.position.y = -6.46;
+const target = new THREE.Vector3(0, -2.2, -1.6); // Ponto para o qual a câmera olhará
 camera.lookAt(target);
 
 directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.set(0, -5.5, 6);
+directionalLight.position.set(0, -6, 4);
 directionalLight.castShadow = true;
 directionalLight.shadow.camera.top = 10;
 directionalLight.shadow.camera.bottom = -10;
@@ -97,6 +97,18 @@ powerUp.visible = false;
 const textureLoader = new THREE.TextureLoader();
 const brickTexture = textureLoader.load(
   "../assets/textures/stone.jpg",
+  function (texture) {
+    // Callback chamado quando a textura é carregada com sucesso
+    console.log("Textura carregada com sucesso!");
+  },
+  undefined,
+  function (error) {
+    // Callback chamado se houver um erro no carregamento da textura
+    console.error("Erro ao carregar a textura:", error);
+  }
+);
+const fighterTexture = textureLoader.load(
+  "../assets/fighter_texture.jpg",
   function (texture) {
     // Callback chamado quando a textura é carregada com sucesso
     console.log("Textura carregada com sucesso!");
@@ -518,7 +530,7 @@ function buildHitter() {
   cylinderCSG = CSG.fromMesh(cylinderMesh);
   csgObject = cylinderCSG.subtract(cubeCSG);
   hitter = CSG.toMesh(csgObject, auxMat);
-  hitter.material = new THREE.MeshLambertMaterial({ color: "grey" });
+  hitter.material = new THREE.MeshLambertMaterial({ map: fighterTexture });
   hitter.position.set(0, -6, 0.2);
   hitter.rotation.x = Math.PI / 2;
 
