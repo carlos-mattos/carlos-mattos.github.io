@@ -241,7 +241,8 @@ function buildRectanglesForPhase() {
           ((numColumns - 1) * (rectangleWidth + rectangleSpacing)) / 2;
         const offsetY =
           (numRows / 2 - row - 1) * (rectangleHeight + rectangleSpacing) +
-          rectangleHeight / 4;
+          rectangleHeight / 2 +
+          2;
 
         rectangle.userData = { hitCount, soundToPlay };
 
@@ -308,7 +309,8 @@ function buildRectanglesForPhase() {
             ((numColumns - 1) * (rectangleWidth + spacing)) / 2;
           const offsetY =
             (numRows / 2 - row - 1) * (rectangleHeight + spacing) +
-            rectangleHeight / 4;
+            rectangleHeight / 2 +
+            2;
 
           if (grid === 0) {
             rectangle.position.set(offsetX - 2.0, offsetY, 0.2);
@@ -373,7 +375,8 @@ function buildRectanglesForPhase() {
             ((numColumns - 1) * (rectangleWidth + spacing)) / 2;
           const offsetY =
             (numRows / 2 - row - 1) * (rectangleHeight + spacing) +
-            rectangleHeight / 4;
+            rectangleHeight / 2 +
+            2;
 
           rectangle.userData = { hitCount, soundToPlay };
 
