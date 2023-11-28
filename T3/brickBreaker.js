@@ -7,6 +7,7 @@ import {
 import { CSG } from "../libs/other/CSGMesh.js";
 import { OBJLoader } from "../build/jsm/loaders/OBJLoader.js";
 import { OrbitControls } from "../build/jsm/controls/OrbitControls.js";
+import { TertiaryBox } from "./util.js";
 
 let scene, renderer, camera, directionalLight;
 scene = new THREE.Scene();
@@ -76,6 +77,7 @@ let isMouseClick = false;
 let follow = true;
 let levelUp = false;
 let hasCollidedThisFrame = false;
+let lifes = 5;
 
 const rebatedorSound = new Audio("../assets/sounds/rebatedor.mp3");
 rebatedorSound.preload = "auto";
@@ -109,6 +111,7 @@ const brickTexture = textureLoader.load(
 let currentPhase = 1;
 
 const infoMessage = new SecondaryBox();
+const lifeBar = new TertiaryBox();
 
 document.addEventListener("mousedown", () => {
   isMouseClick = true;
@@ -120,6 +123,7 @@ document.addEventListener("keydown", (event) => {
 
   switch (key) {
     case "r":
+      lifes = 5;
       rebuildInitialState();
       break;
     case " ":
@@ -642,6 +646,7 @@ function checkBallPosition() {
     ballDirection.set(Math.cos(Math.PI / 2), Math.sin(Math.PI / 2), 0);
     ballSpeed = initialBallSpeed;
     levelUp = false;
+    lifes--;
   }
 }
 
@@ -837,6 +842,7 @@ function render() {
   }
 
   infoMessage.changeMessage(`Ball speed: ${ballSpeed.toFixed(4)}`);
+  lifeBar.changeMessage("\u2764\uFE0F".repeat(lifes));
 
   requestAnimationFrame(render);
   renderer.render(scene, camera);
