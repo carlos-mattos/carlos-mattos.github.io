@@ -241,7 +241,7 @@ function buildRectanglesForPhase() {
           ((numColumns - 1) * (rectangleWidth + rectangleSpacing)) / 2;
         const offsetY =
           (numRows / 2 - row - 1) * (rectangleHeight + rectangleSpacing) +
-          rectangleHeight / 2 + 2;
+          rectangleHeight / 4;
 
         rectangle.userData = { hitCount, soundToPlay };
 
@@ -308,7 +308,7 @@ function buildRectanglesForPhase() {
             ((numColumns - 1) * (rectangleWidth + spacing)) / 2;
           const offsetY =
             (numRows / 2 - row - 1) * (rectangleHeight + spacing) +
-            rectangleHeight / 2 + 2;
+            rectangleHeight / 4;
 
           if (grid === 0) {
             rectangle.position.set(offsetX - 2.0, offsetY, 0.2);
@@ -373,7 +373,7 @@ function buildRectanglesForPhase() {
             ((numColumns - 1) * (rectangleWidth + spacing)) / 2;
           const offsetY =
             (numRows / 2 - row - 1) * (rectangleHeight + spacing) +
-            rectangleHeight / 2 + 2;
+            rectangleHeight / 4;
 
           rectangle.userData = { hitCount, soundToPlay };
 
@@ -858,7 +858,7 @@ function render() {
     checkWallCollisions();
     checkHitterCollisions();
     checkRectangleCollisions();
-    checkLife()
+    checkLife();
   }
 
   infoMessage.changeMessage(`Ball speed: ${ballSpeed.toFixed(4)}`);
