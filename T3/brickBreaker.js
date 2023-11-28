@@ -391,10 +391,22 @@ function buildRectanglesForPhase() {
 }
 
 function checkIfGameIsOver() {
-  if (builtRectangles.length === removedRectangles.length) {
-    currentPhase = currentPhase === 1 ? 2 : 1;
-    buildRectanglesForPhase();
-    levelUp = true;
+  if (4 === removedRectangles.length) {
+    if (currentPhase === 3) {
+      controlPauseSimulation();
+      document.getElementById("webgl-output").style.display = "none";
+      document.getElementById("box").style.display = "none";
+      document.getElementById("lifebar").style.display = "none";
+      document.getElementById("game-over-container").style.display = "flex";
+    } else if (currentPhase === 2) {
+      currentPhase = 3;
+      buildRectanglesForPhase();
+      levelUp = true;
+    } else if (currentPhase === 1) {
+      currentPhase = 2;
+      buildRectanglesForPhase();
+      levelUp = true;
+    }
   }
 }
 
@@ -827,9 +839,9 @@ function movimentaPowerUp() {
   powerUp.position.y -= 0.01;
 
   if (
-    (powerUp.position.y < hitter.position.y + 1.4 &&
-      powerUp.position.x < hitter.position.x + 1 &&
-      powerUp.position.x > hitter.position.x - 1)
+    powerUp.position.y < hitter.position.y + 1.4 &&
+    powerUp.position.x < hitter.position.x + 1 &&
+    powerUp.position.x > hitter.position.x - 1
   ) {
     powerUp.visible = false;
     powerUp.position.y = -5;

@@ -1,7 +1,7 @@
 export class TertiaryBox {
   constructor(defaultText) {
     this.box = document.createElement("div");
-    this.box.id = "box";
+    this.box.id = "lifebar";
     this.box.style.padding = "6px 14px";
     this.box.style.top = "0";
     this.box.style.right = "0";
