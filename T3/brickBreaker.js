@@ -664,15 +664,18 @@ function checkBallPosition() {
 
   const ballGeometry = intersectionBall.geometry;
   const ballRadius = ballGeometry.parameters.radius;
-  if (intersectionBall.position.y <= -7 + ballRadius || levelUp) {
-    scene.remove(intersectionBall);
-    buildBall();
-    isMouseClick = false;
-    follow = true;
-    ballDirection.set(Math.cos(Math.PI / 2), Math.sin(Math.PI / 2), 0);
-    ballSpeed = initialBallSpeed;
-    levelUp = false;
-    lifes--;
+  if (intersectionBall.position.y <= -7 + ballRadius) {
+    if (levelUp) {
+      scene.remove(intersectionBall);
+      buildBall();
+      isMouseClick = false;
+      follow = true;
+      ballDirection.set(Math.cos(Math.PI / 2), Math.sin(Math.PI / 2), 0);
+      ballSpeed = initialBallSpeed;
+      levelUp = false;
+    } else {
+      lifes--;
+    }
   }
 }
 
