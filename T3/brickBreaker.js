@@ -79,11 +79,11 @@ let levelUp = false;
 let hasCollidedThisFrame = false;
 let lifes = 5;
 
-const rebatedorSound = new Audio("../assets/sounds/rebatedor.mp3");
+const rebatedorSound = new Audio("./assets/sounds/rebatedor.mp3");
 rebatedorSound.preload = "auto";
-const bloco1Sound = new Audio("../assets/sounds/bloco1.mp3");
+const bloco1Sound = new Audio("./assets/sounds/bloco1.mp3");
 bloco1Sound.preload = "auto";
-const bloco2Sound = new Audio("../assets/sounds/bloco2.mp3");
+const bloco2Sound = new Audio("./assets/sounds/bloco2.mp3");
 bloco2Sound.preload = "auto";
 
 let powerUp = new THREE.Mesh(
@@ -96,7 +96,7 @@ powerUp.visible = false;
 
 const textureLoader = new THREE.TextureLoader();
 const brickTexture = textureLoader.load(
-  "../assets/textures/stone.jpg",
+  "./assets/textures/stone.jpg",
   function (texture) {
     // Callback chamado quando a textura é carregada com sucesso
     console.log("Textura carregada com sucesso!");
@@ -108,7 +108,7 @@ const brickTexture = textureLoader.load(
   }
 );
 const fighterTexture = textureLoader.load(
-  "../assets/fighter_texture.jpg",
+  "./assets/fighter_texture.jpg",
   function (texture) {
     // Callback chamado quando a textura é carregada com sucesso
     console.log("Textura carregada com sucesso!");
@@ -159,8 +159,8 @@ document.addEventListener("keydown", (event) => {
 });
 const builtRectangles = [];
 
-const objPath = "../assets/fighter.obj";
-const texturePath = "../assets/fighter_texture.jpg";
+const objPath = "./assets/fighter.obj";
+const texturePath = "./assets/fighter_texture.jpg";
 
 buildSkybox();
 buildPlane();
@@ -173,7 +173,7 @@ startBallMovement();
 //-- Functions --------------------------------------------------------------
 
 function buildSkybox() {
-  const path = "../assets/";
+  const path = "./assets/";
   const format = ".png";
   const urls = [
     path + "sp2_ft" + format,
