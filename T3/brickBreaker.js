@@ -671,8 +671,8 @@ function checkBallPosition() {
     follow = true;
     ballDirection.set(Math.cos(Math.PI / 2), Math.sin(Math.PI / 2), 0);
     ballSpeed = initialBallSpeed;
+    if (!levelUp) lifes--;
     levelUp = false;
-    lifes--;
   }
 }
 
