@@ -391,7 +391,11 @@ function buildRectanglesForPhase() {
 }
 
 function checkIfGameIsOver() {
-  if (builtRectangles.length === removedRectangles.length) {
+  if (
+    builtRectangles.length === removedRectangles.length ||
+    (builtRectangles.length === removedRectangles.length + 8 &&
+      currentPhase === 3)
+  ) {
     if (currentPhase === 3) {
       controlPauseSimulation();
       document.getElementById("webgl-output").style.display = "none";
@@ -641,10 +645,10 @@ function onMouseMove(event) {
   if (intersects.length > 0) {
     let point = intersects[0].point;
     hitter.visible = true;
-    if (point.x < -2.9) {
-      hitter.position.x = -2.9;
-    } else if (point.x > 2.9) {
-      hitter.position.x = 2.9;
+    if (point.x < -2.7) {
+      hitter.position.x = -2.7;
+    } else if (point.x > 2.7) {
+      hitter.position.x = 2.7;
     } else {
       hitter.position.set(point.x, -6, 0.2);
     }

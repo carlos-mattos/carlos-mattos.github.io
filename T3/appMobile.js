@@ -107,19 +107,21 @@ if (isMobileDevice()) {
   window.addEventListener("mousemove", onMouseMove);
 }
 
-document.getElementById('fullscreen-button').addEventListener('click', function () {
-  toggleFullscreen();
-});
+document
+  .getElementById("fullscreen-button")
+  .addEventListener("click", function () {
+    toggleFullscreen();
+  });
 
 function toggleFullscreen() {
   if (!document.fullscreenElement) {
-     document.documentElement.requestFullscreen().catch(err => {
-        alert(`Erro ao tentar entrar no modo de tela cheia: ${err.message}`);
-     });
+    document.documentElement.requestFullscreen().catch((err) => {
+      alert(`Erro ao tentar entrar no modo de tela cheia: ${err.message}`);
+    });
   } else {
-     if (document.exitFullscreen) {
-        document.exitFullscreen();
-     }
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
   }
 }
 
@@ -195,9 +197,9 @@ let currentPhase = 1;
 const infoMessage = new SecondaryBox();
 const lifeBar = new TertiaryBox();
 
-const executeButton = document.getElementById('executeMovement');
+const executeButton = document.getElementById("executeMovement");
 
-executeButton.addEventListener('click', function() {
+executeButton.addEventListener("click", function () {
   isMouseClick = true;
   follow = false;
 });
@@ -468,14 +470,18 @@ function buildRectanglesForPhase() {
 }
 
 function checkIfGameIsOver() {
-  if (6 === removedRectangles.length) {
+  if (
+    builtRectangles.length === removedRectangles.length ||
+    (builtRectangles.length === removedRectangles.length + 8 &&
+      currentPhase === 3)
+  ) {
     if (currentPhase === 3) {
       controlPauseSimulation();
       document.getElementById("webgl-output").style.display = "none";
       document.getElementById("box").style.display = "none";
       document.getElementById("lifebar").style.display = "none";
       document.getElementById("game-over-container").style.display = "flex";
-      document.getElementById('executeMovement').style.display = 'none';
+      document.getElementById("executeMovement").style.display = "none";
     } else if (currentPhase === 2) {
       currentPhase = 3;
       buildRectanglesForPhase();
@@ -719,10 +725,10 @@ function onMouseMove(event) {
   if (intersects.length > 0) {
     let point = intersects[0].point;
     hitter.visible = true;
-    if (point.x < -2.9) {
-      hitter.position.x = -2.9;
-    } else if (point.x > 2.9) {
-      hitter.position.x = 2.9;
+    if (point.x < -2.7) {
+      hitter.position.x = -2.7;
+    } else if (point.x > 2.7) {
+      hitter.position.x = 2.7;
     } else {
       hitter.position.set(point.x, -6, 0.2);
     }
