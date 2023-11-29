@@ -107,6 +107,22 @@ if (isMobileDevice()) {
   window.addEventListener("mousemove", onMouseMove);
 }
 
+document.getElementById('fullscreen-button').addEventListener('click', function () {
+  toggleFullscreen();
+});
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+     document.documentElement.requestFullscreen().catch(err => {
+        alert(`Erro ao tentar entrar no modo de tela cheia: ${err.message}`);
+     });
+  } else {
+     if (document.exitFullscreen) {
+        document.exitFullscreen();
+     }
+  }
+}
+
 // -- Create raycaster
 let raycaster = new THREE.Raycaster();
 raycaster.layers.enable(0);
@@ -179,10 +195,17 @@ let currentPhase = 1;
 const infoMessage = new SecondaryBox();
 const lifeBar = new TertiaryBox();
 
-document.addEventListener("mousedown", () => {
+const executeButton = document.getElementById('executeMovement');
+
+executeButton.addEventListener('click', function() {
   isMouseClick = true;
   follow = false;
 });
+
+// document.addEventListener("mousedown", () => {
+//   isMouseClick = true;
+//   follow = false;
+// });
 
 document.addEventListener("keydown", (event) => {
   const key = event.key;
@@ -452,6 +475,7 @@ function checkIfGameIsOver() {
       document.getElementById("box").style.display = "none";
       document.getElementById("lifebar").style.display = "none";
       document.getElementById("game-over-container").style.display = "flex";
+      document.getElementById('executeMovement').style.display = 'none';
     } else if (currentPhase === 2) {
       currentPhase = 3;
       buildRectanglesForPhase();

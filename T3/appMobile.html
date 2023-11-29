@@ -39,6 +39,43 @@
          Começar</button>
    </div>
 
+   <div id="fullscreen-button-container" style="text-align: center;">
+      <button id="fullscreen-button" style="
+      font-size: 16px;
+      padding: 10px 20px;
+      cursor: pointer;
+      position: absolute;
+         top: 10px;
+         left: 10px;
+         z-index: 9999;
+      background-color: #2f006d;
+      border: none;
+      border-radius: 30px;
+      color: #ffffff;
+      font-weight: bold;
+      "> Tela Cheia
+      </button>
+   </div>
+
+   <div id="executeMovement-container" style="text-align: center;">
+      <button id="executeMovement" style="
+      display: none;
+      font-size: 16px;
+      padding: 10px 20px;
+      cursor: pointer;
+      position: absolute;
+         bottom: 10px;
+         right: 10px;
+         z-index: 9999;
+      background-color: #2f006d;
+      border: none;
+      border-radius: 50px;
+      color: #ffffff;
+      font-weight: bold;
+      "> Start
+      </button>
+   </div>
+
    <div id="webgl-output" style="display: none;"></div>
 
    <div id="game-over-container" style="
@@ -70,6 +107,7 @@
       document.getElementById('start-button').addEventListener('click', function () {
          document.getElementById('start-button-container').style.display = 'none';
          document.getElementById('webgl-output').style.display = 'block';
+         document.getElementById('executeMovement').style.display = 'block';
          var script = document.createElement('script');
          script.type = 'module';
          script.src = 'appMobile.js';
